@@ -1,0 +1,69 @@
+{
+  "name": "short-form-captions guidelines",
+  "about": "Caption timing and length limits from published subtitle guidelines, each with the guideline's own words and the day it was read. A rule's level is fail when the source states it as a limit or a requirement, warn when the source recommends or gives it as a guide. These are the publishers' rules for their own programmes, used as a sourced yardstick for short video; no app requires them.",
+  "sources": {
+    "netflix-en": {
+      "publisher": "Netflix Partner Help Center",
+      "title": "English (USA) Timed Text Style Guide",
+      "url": "https://partnerhelp.netflixstudios.com/hc/en-us/articles/217350977-English-USA-Timed-Text-Style-Guide",
+      "checked": "2026-11-23"
+    },
+    "netflix-general": {
+      "publisher": "Netflix Partner Help Center",
+      "title": "Timed Text Style Guide: General Requirements",
+      "url": "https://partnerhelp.netflixstudios.com/hc/en-us/articles/215758617-Timed-Text-Style-Guide-General-Requirements",
+      "checked": "2026-11-23"
+    },
+    "netflix-timing": {
+      "publisher": "Netflix Partner Help Center",
+      "title": "Timed Text Style Guide: Subtitle Timing Guidelines",
+      "url": "https://partnerhelp.netflixstudios.com/hc/en-us/articles/360051554394-Timed-Text-Style-Guide-Subtitle-Timing-Guidelines",
+      "checked": "2026-11-23"
+    },
+    "bbc": {
+      "publisher": "BBC",
+      "title": "BBC Subtitle Guidelines, version 1.2.5 (March 2026)",
+      "url": "https://www.bbc.co.uk/accessibility/forproducts/guides/subtitles/",
+      "checked": "2026-11-23"
+    }
+  },
+  "profiles": {
+    "netflix": {
+      "name": "Netflix, English (USA) SDH (same-language captions), adult programs",
+      "rules": [
+        { "id": "max-chars-per-line", "limit": 42, "level": "fail", "source": "netflix-en", "section": "I.2 Character Limitation", "quote": "42 characters per line" },
+        { "id": "max-lines", "limit": 2, "level": "fail", "source": "netflix-en", "section": "I.10 Line Treatment", "quote": "Maximum two lines." },
+        { "id": "max-cps", "limit": 20, "level": "fail", "source": "netflix-en", "section": "I.14 Reading Speed Limits", "quote": "Adult programs: Up to 20 characters per second" },
+        { "id": "min-duration", "limit": 0.8333, "level": "fail", "source": "netflix-general", "section": "1 Duration", "quote": "Minimum duration: 5/6 (five-sixths) of a second per subtitle event (e.g. 20 frames for 24fps)" },
+        { "id": "max-duration", "limit": 7, "level": "fail", "source": "netflix-general", "section": "1 Duration", "quote": "Maximum duration: 7 seconds per subtitle event" },
+        { "id": "min-gap-frames", "limit": 2, "level": "fail", "source": "netflix-timing", "section": "5: Gaps between subtitles", "quote": "Subtitles must have a minimum of 2 frames between them. This parameter is applicable to any frame rate of content." },
+        { "id": "close-gaps-24fps", "min": 3, "limit": 11, "level": "fail", "source": "netflix-timing", "section": "5: Gaps between subtitles", "quote": "In 24fps content, any gaps between subtitles of 3-11 frames inclusive must be closed to 2 frames." },
+        { "id": "close-gaps-under", "limit": 0.5, "level": "warn", "source": "netflix-timing", "section": "5: Gaps between subtitles", "quote": "Gaps between subtitles should either be 2 frames or half a second or more." }
+      ]
+    },
+    "netflix-children": {
+      "name": "Netflix, English (USA) SDH (same-language captions), children's programs",
+      "extends": "netflix",
+      "rules": [
+        { "id": "max-cps", "limit": 17, "level": "fail", "source": "netflix-en", "section": "I.14 Reading Speed Limits", "quote": "Children’s programs: Up to 17 characters per second" }
+      ]
+    },
+    "bbc": {
+      "name": "BBC, landscape or square video (37 characters is the broadcast Teletext limit; online the limit is a width)",
+      "rules": [
+        { "id": "max-chars-per-line", "limit": 37, "level": "warn", "source": "bbc", "section": "3.1 Line length", "quote": "broadcast 37 characters, reduced if coloured text is used", "note": "Teletext's limit, used here as a guide: online the BBC limits a line by width (68% of a 16:9 frame), not by characters." },
+        { "id": "max-lines", "limit": 2, "level": "warn", "source": "bbc", "section": "3.3 Number of lines", "quote": "For landscape or square (16:9, 4:3 or 1:1) video, a maximum subtitle length of two lines is recommended." },
+        { "id": "max-wpm", "limit": 180, "level": "warn", "source": "bbc", "section": "4 Timing", "quote": "The recommended subtitle speed is 160-180 words-per-minute (WPM) or 0.33 to 0.375 second per word." },
+        { "id": "min-seconds-per-word", "limit": 0.3, "level": "warn", "source": "bbc", "section": "4.1 Target minimum timing", "quote": "you should aim to leave a subtitle on screen for a minimum period of around 0.3 seconds per word (e.g. 1.2 seconds for a 4-word subtitle)" }
+      ]
+    },
+    "bbc-vertical": {
+      "name": "BBC, vertical (9:16) video",
+      "extends": "bbc",
+      "rules": [
+        { "id": "max-chars-per-line", "limit": 25, "level": "warn", "source": "bbc", "section": "3.1 Line length", "quote": "As a guide, the equivalent to 37 characters in a 75% width region of a 16:9 (landscape) video is 25 characters in a 90% width region of a 9:16 (vertical) video." },
+        { "id": "max-lines", "limit": 3, "level": "warn", "source": "bbc", "section": "3.3 Number of lines", "quote": "For vertical (9:16) video, a maximum subtitle length of three lines is recommended." }
+      ]
+    }
+  }
+}

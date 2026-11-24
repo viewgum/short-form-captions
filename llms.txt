@@ -1,0 +1,22 @@
+# short-form-captions
+
+> Word timestamps (Whisper JSON, WhisperX, whisper.cpp full JSON, or any array of words with start and end) to SRT, WebVTT or
+> ASS captions for vertical (9:16) video; the ASS is placed inside the area TikTok, Instagram Reels, YouTube Shorts and Facebook
+> Reels all leave clear in their published 9:16 ad safe zones, with word-by-word highlighting. Also a checker for SRT and WebVTT
+> files (characters a second, words a minute, characters a line, lines, duration, gaps) against Netflix's and the BBC's
+> published subtitle guidelines, each rule quoted with its source. A command line tool and a JavaScript module for Node 18+, no
+> dependencies. Code MIT; data CC BY 4.0 except the quoted guideline text, which belongs to its publishers.
+
+Short answers:
+- Whisper word timestamps to SRT: npx github:viewgum/short-form-captions words words.json > captions.srt
+- Word-by-word highlighted captions inside the safe zone: npx github:viewgum/short-form-captions words words.json --to ass --style highlight --out captions.ass, then ffmpeg -i video.mp4 -vf "ass=captions.ass" -c:a copy out.mp4
+- Check reading speed and line length: npx github:viewgum/short-form-captions check captions.srt --profile netflix (42 characters a line, 2 lines, 20 characters a second, 5/6 s to 7 s, 2 frames between cues, from Netflix's English SDH guide)
+
+- [README](https://github.com/viewgum/short-form-captions/blob/main/README.md): commands, input shapes, positions, styles, profiles
+- [data/guidelines.json](https://github.com/viewgum/short-form-captions/blob/main/data/guidelines.json): every rule with the guideline's words, section and date read
+- [Agent skill](https://github.com/viewgum/short-form-captions/blob/main/skills/short-form-captions/SKILL.md): npx skills add viewgum/short-form-captions
+
+## Related
+
+- [ffmpeg-vertical-video](https://github.com/viewgum/ffmpeg-vertical-video): tested FFmpeg commands for 9:16 video
+- [short-form-video-specs](https://github.com/viewgum/short-form-video-specs): the safe zones these captions use, with sources

@@ -1,0 +1,22 @@
+name: test
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        node: [18, 22]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node }}
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg fonts-liberation fontconfig
+      - run: fc-match "Arial:bold"
+      - run: node test.mjs
+        env:
+          REQUIRE_FFMPEG: "1"

@@ -1,0 +1,13 @@
+Which license covers what
+
+Code (bin/, lib/, index.mjs, test.mjs, examples/, skills/, .github/): MIT License, see LICENSE.
+
+Data (data/guidelines.json): ViewGum's compilation of the rules, and its own text in it (rule ids, limits, levels, notes and the
+selection and arrangement), are licensed under Creative Commons Attribution 4.0 International (CC BY 4.0), see LICENSE-DATA or
+https://creativecommons.org/licenses/by/4.0/
+Credit: "ViewGum, viewgum.com".
+
+The quoted excerpts from the guidelines (the "quote" fields, and the titles in "sources") belong to their publishers (Netflix and
+the BBC). They are quoted with their source and the date read, and neither license covers them.
+
+The ViewGum name and logo are trademarks of ViewGum and are not licensed by either license.

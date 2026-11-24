@@ -1,0 +1,35 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Arial,72,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,4,0,2,300,300,700,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.12,0:00:00.46,Default,,0,0,0,,{\c&H0000D4FF&}Bread{\c&H00FFFFFF&} rises
+Dialogue: 0,0:00:00.46,0:00:00.85,Default,,0,0,0,,Bread {\c&H0000D4FF&}rises{\c&H00FFFFFF&}
+Dialogue: 0,0:00:00.92,0:00:01.28,Default,,0,0,0,,{\c&H0000D4FF&}because{\c&H00FFFFFF&}\Nyeast
+Dialogue: 0,0:00:01.28,0:00:01.55,Default,,0,0,0,,because\N{\c&H0000D4FF&}yeast{\c&H00FFFFFF&}
+Dialogue: 0,0:00:01.62,0:00:01.90,Default,,0,0,0,,{\c&H0000D4FF&}eats{\c&H00FFFFFF&} sugar
+Dialogue: 0,0:00:01.90,0:00:02.27,Default,,0,0,0,,eats {\c&H0000D4FF&}sugar{\c&H00FFFFFF&}
+Dialogue: 0,0:00:02.34,0:00:02.46,Default,,0,0,0,,{\c&H0000D4FF&}and{\c&H00FFFFFF&} breathes\Nout gas.
+Dialogue: 0,0:00:02.46,0:00:02.90,Default,,0,0,0,,and {\c&H0000D4FF&}breathes{\c&H00FFFFFF&}\Nout gas.
+Dialogue: 0,0:00:02.90,0:00:03.10,Default,,0,0,0,,and breathes\N{\c&H0000D4FF&}out{\c&H00FFFFFF&} gas.
+Dialogue: 0,0:00:03.10,0:00:03.60,Default,,0,0,0,,and breathes\Nout {\c&H0000D4FF&}gas.{\c&H00FFFFFF&}
+Dialogue: 0,0:00:04.20,0:00:04.32,Default,,0,0,0,,{\c&H0000D4FF&}The{\c&H00FFFFFF&} gluten\Ntraps it,
+Dialogue: 0,0:00:04.32,0:00:04.70,Default,,0,0,0,,The {\c&H0000D4FF&}gluten{\c&H00FFFFFF&}\Ntraps it,
+Dialogue: 0,0:00:04.70,0:00:05.02,Default,,0,0,0,,The gluten\N{\c&H0000D4FF&}traps{\c&H00FFFFFF&} it,
+Dialogue: 0,0:00:05.02,0:00:05.37,Default,,0,0,0,,The gluten\Ntraps {\c&H0000D4FF&}it,{\c&H00FFFFFF&}
+Dialogue: 0,0:00:05.44,0:00:05.60,Default,,0,0,0,,{\c&H0000D4FF&}so{\c&H00FFFFFF&} the dough\Npuffs
+Dialogue: 0,0:00:05.60,0:00:05.70,Default,,0,0,0,,so {\c&H0000D4FF&}the{\c&H00FFFFFF&} dough\Npuffs
+Dialogue: 0,0:00:05.70,0:00:06.02,Default,,0,0,0,,so the {\c&H0000D4FF&}dough{\c&H00FFFFFF&}\Npuffs
+Dialogue: 0,0:00:06.02,0:00:06.29,Default,,0,0,0,,so the dough\N{\c&H0000D4FF&}puffs{\c&H00FFFFFF&}
+Dialogue: 0,0:00:06.36,0:00:06.52,Default,,0,0,0,,{\c&H0000D4FF&}up{\c&H00FFFFFF&} like\Na balloon.
+Dialogue: 0,0:00:06.52,0:00:06.70,Default,,0,0,0,,up {\c&H0000D4FF&}like{\c&H00FFFFFF&}\Na balloon.
+Dialogue: 0,0:00:06.70,0:00:06.76,Default,,0,0,0,,up like\N{\c&H0000D4FF&}a{\c&H00FFFFFF&} balloon.
+Dialogue: 0,0:00:06.76,0:00:07.40,Default,,0,0,0,,up like\Na {\c&H0000D4FF&}balloon.{\c&H00FFFFFF&}

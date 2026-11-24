@@ -1,0 +1,26 @@
+{
+  "words": [
+    { "word": "Bread", "start": 0.12, "end": 0.46 },
+    { "word": "rises", "start": 0.46, "end": 0.88 },
+    { "word": "because", "start": 0.92, "end": 1.28 },
+    { "word": "yeast", "start": 1.28, "end": 1.62 },
+    { "word": "eats", "start": 1.62, "end": 1.9 },
+    { "word": "sugar", "start": 1.9, "end": 2.3 },
+    { "word": "and", "start": 2.34, "end": 2.46 },
+    { "word": "breathes", "start": 2.46, "end": 2.9 },
+    { "word": "out", "start": 2.9, "end": 3.1 },
+    { "word": "gas.", "start": 3.1, "end": 3.6 },
+    { "word": "The", "start": 4.2, "end": 4.32 },
+    { "word": "gluten", "start": 4.32, "end": 4.7 },
+    { "word": "traps", "start": 4.7, "end": 5.02 },
+    { "word": "it,", "start": 5.02, "end": 5.3 },
+    { "word": "so", "start": 5.44, "end": 5.6 },
+    { "word": "the", "start": 5.6, "end": 5.7 },
+    { "word": "dough", "start": 5.7, "end": 6.02 },
+    { "word": "puffs", "start": 6.02, "end": 6.36 },
+    { "word": "up", "start": 6.36, "end": 6.52 },
+    { "word": "like", "start": 6.52, "end": 6.7 },
+    { "word": "a", "start": 6.7, "end": 6.76 },
+    { "word": "balloon.", "start": 6.76, "end": 7.4 }
+  ]
+}

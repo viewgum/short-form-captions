@@ -1,0 +1,54 @@
+{
+  "name": "short-form-captions",
+  "version": "1.0.0",
+  "description": "Word timings (Whisper-style JSON) to SRT, WebVTT and ASS captions for vertical video, the ASS placed inside the TikTok, Reels and Shorts safe zone with word highlighting, and a checker for reading speed, line length and timing against Netflix and BBC guidelines.",
+  "type": "module",
+  "main": "./index.mjs",
+  "exports": {
+    ".": "./index.mjs",
+    "./guidelines.json": "./data/guidelines.json"
+  },
+  "bin": {
+    "short-form-captions": "bin/short-form-captions.mjs"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "data",
+    "index.mjs",
+    "LICENSE",
+    "LICENSE-DATA",
+    "NOTICE",
+    "README.md",
+    "llms.txt",
+    "skills"
+  ],
+  "scripts": {
+    "test": "node test.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "captions",
+    "subtitles",
+    "srt",
+    "webvtt",
+    "ass",
+    "whisper",
+    "word-timestamps",
+    "tiktok",
+    "instagram-reels",
+    "youtube-shorts",
+    "vertical-video",
+    "safe-zone"
+  ],
+  "author": "ViewGum (https://viewgum.com)",
+  "license": "(MIT AND CC-BY-4.0)",
+  "homepage": "https://github.com/viewgum/short-form-captions#readme",
+  "bugs": "https://github.com/viewgum/short-form-captions/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viewgum/short-form-captions.git"
+  }
+}
