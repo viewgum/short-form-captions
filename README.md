@@ -151,6 +151,13 @@ captions with it:
 npx skills add viewgum/short-form-captions
 ```
 
+In Claude Code, as a plugin:
+
+```sh
+claude plugin marketplace add viewgum/short-form-captions
+claude plugin install short-form-captions@viewgum-captions
+```
+
 Any chat assistant: paste [skills/short-form-captions/SKILL.md](skills/short-form-captions/SKILL.md) into the chat.
 
 ## How it is tested

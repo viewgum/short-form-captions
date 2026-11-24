@@ -21,7 +21,9 @@
     "NOTICE",
     "README.md",
     "llms.txt",
-    "skills"
+    "skills",
+    ".claude-plugin",
+    "assets"
   ],
   "scripts": {
     "test": "node test.mjs"

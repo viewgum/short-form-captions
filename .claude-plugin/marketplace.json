@@ -1,0 +1,18 @@
+{
+  "name": "viewgum-captions",
+  "owner": {
+    "name": "ViewGum",
+    "email": "support@viewgum.com",
+    "url": "https://viewgum.com"
+  },
+  "description": "Captions for vertical short video, as an agent skill.",
+  "plugins": [
+    {
+      "name": "short-form-captions",
+      "source": "./",
+      "description": "Word timestamps to SRT, WebVTT or ASS captions inside the safe zone, and a caption checker.",
+      "homepage": "https://github.com/viewgum/short-form-captions",
+      "license": "MIT"
+    }
+  ]
+}

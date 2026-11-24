@@ -7,6 +7,7 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-24.04
+    timeout-minutes: 30
     strategy:
       matrix:
         node: [18, 22]
@@ -15,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
-      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg fonts-liberation fontconfig
+      - run: sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -o Acquire::Retries=3 --no-install-recommends ffmpeg fonts-liberation fontconfig
       - run: fc-match "Arial:bold"
       - run: node test.mjs
         env:

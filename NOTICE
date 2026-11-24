@@ -1,6 +1,6 @@
 Which license covers what
 
-Code (bin/, lib/, index.mjs, test.mjs, examples/, skills/, .github/): MIT License, see LICENSE.
+Code (bin/, lib/, index.mjs, test.mjs, examples/, skills/, .claude-plugin/, .github/): MIT License, see LICENSE.
 
 Data (data/guidelines.json): ViewGum's compilation of the rules, and its own text in it (rule ids, limits, levels, notes and the
 selection and arrangement), are licensed under Creative Commons Attribution 4.0 International (CC BY 4.0), see LICENSE-DATA or
