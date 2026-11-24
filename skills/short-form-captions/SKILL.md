@@ -14,7 +14,9 @@ The tool is `short-form-captions` (https://github.com/viewgum/short-form-caption
    With only audio, they need word timestamps first, for example Whisper with word timestamps on
    (`whisper audio.mp3 --word_timestamps True --output_format json`). Do not invent timings.
 2. Make captions from word timings:
-   - SRT or WebVTT for an app's own caption upload: `npx github:viewgum/short-form-captions words words.json --out captions.srt`
+   - SRT or WebVTT as a caption file: `npx github:viewgum/short-form-captions words words.json --out captions.srt`. YouTube
+     Studio takes SRT or WebVTT (https://support.google.com/youtube/answer/2734698) and Facebook takes SRT for a video on a
+     profile (https://www.facebook.com/help/www/261764017354370); for the other apps, burn the ASS in (step 3).
    - ASS to burn into the picture, inside the safe zone:
      `npx github:viewgum/short-form-captions words words.json --to ass --style highlight --out captions.ass`
      (`--style phrase` for plain cues, `one-word` for one word at a time; `--position bottom|middle|top`; `--size 1080x1920`
@@ -40,4 +42,6 @@ The tool is `short-form-captions` (https://github.com/viewgum/short-form-caption
   `{ "segments": [{ "words": [...] }] }` or whisper.cpp's full JSON (`-ojf`); times in seconds unless `--ms`. A file with times
   out of order, or a segment with text but no word timings, is refused (exit 2): fix the input instead of forcing it.
 - `convert` keeps the text and times; tags, styles and positions in the input are dropped. Only ASS output is placed in the
-  safe zone; SRT and WebVTT are for an app's own caption upload.
+  safe zone; SRT and WebVTT are caption files for YouTube Studio (SRT or WebVTT) and Facebook (SRT).
+- A position holds a limited number of lines at a font size (at 72 px: 11 at the bottom, 6 in the middle or at the top); a
+  larger `--max-lines` or `--font-size` is refused with exit 2 instead of leaving the safe zone.

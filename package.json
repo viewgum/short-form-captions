@@ -1,6 +1,6 @@
 {
   "name": "short-form-captions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Word timings (Whisper-style JSON) to SRT, WebVTT and ASS captions for vertical video, the ASS placed inside the TikTok, Reels and Shorts safe zone with word highlighting, and a checker for reading speed, line length and timing against Netflix and BBC guidelines.",
   "type": "module",
   "main": "./index.mjs",

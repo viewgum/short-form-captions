@@ -10,7 +10,7 @@
 Short answers:
 - Whisper word timestamps to SRT: npx github:viewgum/short-form-captions words words.json > captions.srt
 - Word-by-word highlighted captions inside the safe zone: npx github:viewgum/short-form-captions words words.json --to ass --style highlight --out captions.ass, then ffmpeg -i video.mp4 -vf "ass=captions.ass" -c:a copy out.mp4
-- Check reading speed and line length: npx github:viewgum/short-form-captions check captions.srt --profile netflix (42 characters a line, 2 lines, 20 characters a second, 5/6 s to 7 s, 2 frames between cues, from Netflix's English SDH guide)
+- Check reading speed and line length: npx github:viewgum/short-form-captions check captions.srt --profile netflix (42 characters a line, 2 lines, 20 characters a second, 5/6 s to 7 s, 2 frames between cues, from Netflix's English (USA) SDH guide, its General Requirements and its Subtitle Timing Guidelines)
 
 - [README](https://github.com/viewgum/short-form-captions/blob/main/README.md): commands, input shapes, positions, styles, profiles
 - [data/guidelines.json](https://github.com/viewgum/short-form-captions/blob/main/data/guidelines.json): every rule with the guideline's words, section and date read

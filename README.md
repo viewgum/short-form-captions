@@ -2,8 +2,9 @@
 
 Turns word timestamps from Whisper or any other speech-to-text tool into SRT, WebVTT or ASS captions for vertical video. The ASS
 output is placed inside the area TikTok, Instagram Reels, YouTube Shorts and Facebook Reels all leave clear in their published
-9:16 ad safe zones, with word-by-word highlighting if you want it; SRT and WebVTT carry the text and times for an app's own
-caption upload. It also checks any SRT or WebVTT file for reading speed, line length, line count, duration and gaps against
+9:16 ad safe zones, with word-by-word highlighting if you want it. SRT and WebVTT are caption files: YouTube Studio takes SRT
+or WebVTT ([YouTube Help](https://support.google.com/youtube/answer/2734698?hl=en)) and Facebook takes SRT for a video on your
+profile ([Facebook Help](https://www.facebook.com/help/www/261764017354370)); for the other apps, burn the ASS into the picture. It also checks any SRT or WebVTT file for reading speed, line length, line count, duration and gaps against
 Netflix's and the BBC's published subtitle guidelines, quoting the guideline behind each finding. A command line tool and a
 JavaScript module for Node 18 or newer, with no dependencies.
 
@@ -84,7 +85,9 @@ word too wide for the box on its own is drawn smaller so it fits. A wider font c
 A cue made from word timings holds at most six words. `--style highlight` lights each word in `--highlight-color` (default
 FFD400) from its start until the next word starts, with the same line breaks in every frame so the text never jumps;
 `--style one-word` shows one word at a time. `--font`, `--color` and the cue options (`--max-chars`, `--max-lines`,
-`--max-words`, `--max-seconds`, `--fps`) change the rest. ASS reads braces and backslashes as codes, so text in it shows them as
+`--max-words`, `--max-seconds`, `--fps`) change the rest. Each position holds a number of lines at a font size and stays
+clear: at 72 px, 11 at the bottom and 6 in the middle or at the top. A larger `--max-lines` or `--font-size` that would leave
+the safe zone is refused (exit 2), and a cue with more lines than its box holds is drawn smaller. ASS reads braces and backslashes as codes, so text in it shows them as
 parentheses and slashes.
 
 This tool writes SRT and WebVTT without positions or styling: the app or player places them. `convert` turns an SRT or WebVTT
@@ -119,7 +122,7 @@ next one (two cues at once suit positioned WebVTT, not captions burned into a sh
 
 | `--profile` | Rules | Source |
 |---|---|---|
-| `netflix` (default) | 42 characters a line, 2 lines, 20 characters a second, 5/6 s to 7 s on screen, 2 frames between cues; at 24 fps (`--fps 24`) a gap of 3 to 11 frames fails, at other rates a gap between 2 frames and half a second is a warn | Netflix English (USA) Timed Text Style Guide, its section for same-language captions (SDH), and its general and timing pages |
+| `netflix` (default) | 42 characters a line, 2 lines, 20 characters a second, 5/6 s to 7 s on screen, 2 frames between cues; at 24 fps (`--fps 24`) a gap of 3 to 11 frames fails, at other rates a gap between 2 frames and half a second is a warn | Netflix's English (USA) Timed Text Style Guide (its section for same-language captions, SDH), Netflix's Timed Text Style Guide: General Requirements, and its Subtitle Timing Guidelines |
 | `netflix-children` | the same with 17 characters a second | the same |
 | `bbc` | 37 characters a line (the broadcast Teletext limit; online the BBC limits a line by width, so this is a guide), 2 lines, 180 words a minute, 0.3 s a word, all as warns | BBC Subtitle Guidelines 1.2.5 |
 | `bbc-vertical` | the BBC rules with 25 characters a line and 3 lines, its guide for 9:16 video | the same |

@@ -1,7 +1,7 @@
 {
   "name": "short-form-captions",
   "description": "Captions for vertical video: Whisper word timestamps to SRT, WebVTT or ASS, the ASS inside the TikTok, Reels and Shorts safe zone with word highlighting, and a caption checker against Netflix and BBC guidelines.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "ViewGum",
     "email": "support@viewgum.com",

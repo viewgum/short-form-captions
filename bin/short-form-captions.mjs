@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { extname } from "node:path";
 import { wordsFrom } from "../lib/words.mjs";
 import { cuesFromWords, oneWordCues, SUBTITLE_DEFAULTS } from "../lib/cues.mjs";
-import { parseCaptions, toSrt, toVtt, toAss, rewrap, assMeasure, srtTime, isPosition, POSITIONS, ASS_DEFAULTS } from "../lib/formats.mjs";
+import { parseCaptions, toSrt, toVtt, toAss, rewrap, assLayout, assMeasure, srtTime, isPosition, POSITIONS, ASS_DEFAULTS } from "../lib/formats.mjs";
 import { checkCues, formatReport, guidelines } from "../lib/check.mjs";
 
 const VERSION = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8")).version;
@@ -101,6 +101,14 @@ function assOpts(o) {
   };
 }
 
+// The lines a cue may have in ASS: what the user asked, refused when the position's box cannot hold that many at the font size.
+function assLines(o, ass, fallback) {
+  const { linesFit } = assLayout(ass);
+  if (linesFit < 1) throw new Usage(`--font-size ${ass.fontSize} is too large for --position ${ass.position}: not one line fits inside the safe zone`);
+  if (o["max-lines"] > linesFit) throw new Usage(`--position ${ass.position} holds at most ${linesFit} lines at --font-size ${ass.fontSize} inside the safe zone`);
+  return o["max-lines"] ?? Math.min(fallback, linesFit);
+}
+
 function cueOpts(o, to, ass) {
   const c = {};
   if (to === "ass") {
@@ -108,11 +116,12 @@ function cueOpts(o, to, ass) {
     c.measure = measure;
     c.maxChars = o["max-chars"] ? Math.min(maxWidth, o["max-chars"] * measure("n")) : maxWidth;
     c.maxWords = o["max-words"] ?? 6;
+    c.maxLines = assLines(o, ass, SUBTITLE_DEFAULTS.maxLines);
   } else {
     if (o["max-chars"]) c.maxChars = o["max-chars"];
     if (o["max-words"]) c.maxWords = o["max-words"];
+    if (o["max-lines"]) c.maxLines = o["max-lines"];
   }
-  if (o["max-lines"]) c.maxLines = o["max-lines"];
   if (o["max-seconds"]) {
     if (o["max-seconds"] < SUBTITLE_DEFAULTS.minDuration) throw new Usage(`--max-seconds must be at least the minimum duration, ${SUBTITLE_DEFAULTS.minDuration.toFixed(3)} s`);
     c.maxSeconds = o["max-seconds"];
@@ -180,7 +189,7 @@ export function main(argv, io = { out: (s) => process.stdout.write(s), err: (s) 
     let cues = captionsFrom(file);
     if (to === "ass") {
       const { measure, maxWidth } = assMeasure(ass);
-      cues = rewrap(cues, o["max-chars"] ? Math.min(maxWidth, o["max-chars"] * measure("n")) : maxWidth, o["max-lines"] ?? ASS_DEFAULTS.maxLines, measure);
+      cues = rewrap(cues, o["max-chars"] ? Math.min(maxWidth, o["max-chars"] * measure("n")) : maxWidth, assLines(o, ass, ASS_DEFAULTS.maxLines), measure);
     }
     return emit(cues, to, ass, o, io);
   } catch (e) {

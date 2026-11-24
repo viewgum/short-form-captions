@@ -191,6 +191,10 @@ test("ASS: frame size, safe margins for each position, escaping, scaled for 720 
   assert.throws(() => assLayout({ position: "constructor" }), /position/);
   assert.throws(() => assLayout({ font: "Arial,Bold" }), /comma/);
   assert.throws(() => assLayout({ width: 0 }), /positive/);
+  assert.deepEqual(["bottom", "middle", "top"].map((position) => assLayout({ position }).linesFit), [11, 6, 6]);
+  const tall = events(toAss([{ start: 0, end: 1, lines: Array(8).fill("MAXIMUM") }], { position: "top" }))[0];
+  const fs = Number(/\{\\fs(\d+)\}/.exec(tall.text)?.[1]);
+  assert.ok(fs > 0 && fs * 8 * (2288 / 2048) <= 540 - 8, `8 lines at the top are drawn at ${fs}`);
 });
 
 test("ASS: a word too wide for the box is drawn smaller, and gaps survive the centisecond grid", () => {
@@ -335,7 +339,8 @@ test("command line: outputs, files, input encodings and exit codes", () => {
     ["words", ex, "--size", "1920x1080"], ["words", ex, "--size", "0x0", "--to", "ass"], ["words", ex, "--max-chars", "0"], ["words", ex, "--max-words", "0.5"],
     ["words", ex, "--to", "ass", "--color", "red"], ["words", ex, "--to", "ass", "--color="], ["words", ex, "--to", "ass", "--position", "constructor"],
     ["words", ex, "--style", "highlight"], ["words", ex, "--position", "top"], ["check", join(tmp, "bad.srt"), "--out", out], ["words", ex, "--max-seconds", "0.5"],
-    ["words", ex, "--to", "ass", "--font", "Arial,Bold"], ["convert", join(tmp, "warn.srt"), "--to", "vtt", "--max-chars", "20"]]) {
+    ["words", ex, "--to", "ass", "--font", "Arial,Bold"], ["words", ex, "--to", "ass", "--position", "top", "--max-lines", "7"],
+    ["words", ex, "--to", "ass", "--font-size", "600", "--position", "middle"], ["convert", join(tmp, "warn.srt"), "--to", "ass", "--position", "middle", "--max-lines", "7"], ["convert", join(tmp, "warn.srt"), "--to", "vtt", "--max-chars", "20"]]) {
     const r = cli(bad);
     assert.equal(r.code, 2, bad.join(" "));
     assert.match(r.err, /^short-form-captions: /);
@@ -354,6 +359,7 @@ test("rendered captions land inside every app's safe zone", { skip: !ffmpeg && !
   const extra = (s, at) => words(s).map((w) => ({ word: w.text, start: w.start + at, end: w.end + at }));
   caps.words.push(...extra("WOW MAXIMUM WARMTH, MOMENTUM AND WHOLE WHEAT WOMBATS", 8), ...extra("Congratulations", 11), ...extra("MMMMMMMMMMM", 12.5));
   writeFileSync(join(tmp, "words.json"), JSON.stringify(caps));
+  writeFileSync(join(tmp, "tall.json"), JSON.stringify(Array.from({ length: 24 }, (_, i) => ({ word: i % 2 ? "WARMTH" : "MAXIMUM", start: i * 0.3, end: i * 0.3 + 0.28 }))));
   writeFileSync(join(tmp, "long.srt"), "1\n00:00:01,000 --> 00:00:05,000\nThis is a long subtitle made for a wide frame that has to be split across several cues to fit\n");
   for (const [w, h] of [[1080, 1920], [720, 1280]]) {
     const video = join(tmp, `grey-${w}.mp4`);
@@ -364,6 +370,8 @@ test("rendered captions land inside every app's safe zone", { skip: !ffmpeg && !
     for (const position of ["bottom", "middle", "top"]) {
       for (const style of ["phrase", "highlight", "one-word"]) runs.push([`${position}-${style}`, ["words", join(tmp, "words.json"), "--position", position, "--style", style]]);
       runs.push([`${position}-convert`, ["convert", join(tmp, "long.srt"), "--position", position]]);
+      // As many lines as the position holds: 11 at the bottom, 6 in the middle and at the top.
+      runs.push([`${position}-tall`, ["words", join(tmp, "tall.json"), "--position", position, "--max-lines", position === "bottom" ? "11" : "6", "--max-words", "40", "--max-seconds", "20"]]);
     }
     for (const [name, args] of runs) {
       const ass = join(tmp, `${name}-${w}.ass`);
