@@ -156,10 +156,10 @@ test("times print in each format", () => {
 });
 
 test("SRT and WebVTT: round trips, real-world input and bad times", () => {
-  const cues = [{ start: 1, end: 2.5, lines: ["Tom & Jerry <live>", "a b"] }, { start: 3, end: 4, lines: ["two"] }];
+  const cues = [{ start: 1, end: 2.5, lines: ["Tom & Jerry <live>", "a --> b"] }, { start: 3, end: 4, lines: ["two"] }];
   assert.deepEqual(parseSrt(toSrt(cues)).map((c) => [c.start, c.end, c.lines]), cues.map((c) => [c.start, c.end, c.lines]));
   const vtt = toVtt(cues);
-  assert.match(vtt, /Tom &amp; Jerry &lt;live&gt;/);
+  assert.match(vtt, /Tom &amp; Jerry &lt;live&gt;\na --&gt; b\n/);
   assert.deepEqual(parseVtt(vtt).map((c) => [c.start, c.end]), [[1, 2.5], [3, 4]]);
   // Converting WebVTT keeps what a viewer reads: tags off, entities decoded once, braces kept.
   const v = "WEBVTT - title\n\nNOTE a note\n\nSTYLE\n::cue { color: red }\n\nSTYLE recap\n00:01.000 --> 00:02.000 line:80% align:center\nTom &amp; <i>Jerry</i> {42} &amp;lt;\n\n00:03.000 --> 00:04.000\nnext\n";
@@ -335,7 +335,7 @@ test("command line: outputs, files, input encodings and exit codes", () => {
     ["words", ex, "--size", "1920x1080"], ["words", ex, "--size", "0x0", "--to", "ass"], ["words", ex, "--max-chars", "0"], ["words", ex, "--max-words", "0.5"],
     ["words", ex, "--to", "ass", "--color", "red"], ["words", ex, "--to", "ass", "--color="], ["words", ex, "--to", "ass", "--position", "constructor"],
     ["words", ex, "--style", "highlight"], ["words", ex, "--position", "top"], ["check", join(tmp, "bad.srt"), "--out", out], ["words", ex, "--max-seconds", "0.5"],
-    ["words", ex, "--to", "ass", "--font", "Arial,Bold"]]) {
+    ["words", ex, "--to", "ass", "--font", "Arial,Bold"], ["convert", join(tmp, "warn.srt"), "--to", "vtt", "--max-chars", "20"]]) {
     const r = cli(bad);
     assert.equal(r.code, 2, bad.join(" "));
     assert.match(r.err, /^short-form-captions: /);

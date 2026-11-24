@@ -162,7 +162,7 @@ export function main(argv, io = { out: (s) => process.stdout.write(s), err: (s) 
     const to = targetOf(o);
     if (o.style !== undefined && !["phrase", "highlight", "one-word"].includes(o.style)) throw new Usage("--style must be phrase, highlight or one-word");
     if (to !== "ass") {
-      const used = ASS_ONLY.filter((k) => o[k] !== undefined);
+      const used = [...ASS_ONLY, ...(cmd === "convert" ? ["max-chars", "max-lines"] : [])].filter((k) => o[k] !== undefined);
       if (used.length || o.style === "highlight") throw new Usage(`${used.length ? `--${used[0]}` : "--style highlight"} is for ASS output: add --to ass`);
     }
     const ass = assOpts(o);
